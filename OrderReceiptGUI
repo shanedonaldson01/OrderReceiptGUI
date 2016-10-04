@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace OrderReceiptGUI
+{
+    public partial class OrderReceiptGUI : Form
+    {
+        public OrderReceiptGUI()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Define Variables
+            string name, address, city, state, zip;
+            int blenderAmount;
+            double preTaxPrice, taxDue, totalPrice;
+
+            nameRec.Text = "";
+            addressRec.Text = "";
+            cityRec.Text = "";
+            stateRec.Text = "";
+            zipRec.Text = "";
+            preTax.Text = "";
+            taxRec.Text = "";
+            netRec.Text = "";
+
+            //Define Receipt as Visible When Order is Placed
+            receipt.Visible = true;
+
+            //Assign Variables to Input
+            name = nameText.Text;
+            address = addressText.Text;
+            city = cityText.Text;
+            state = stateText.Text;
+            zip = zipText.Text;
+            blenderAmount = Convert.ToInt32(orderText.Text);
+
+            //Perform Calculations
+            preTaxPrice = blenderAmount * 39.95;
+            taxDue = preTaxPrice * .07;
+            totalPrice = preTaxPrice + taxDue;
+
+            //Define User Informatation for Output
+            nameRec.Text = name;
+            addressRec.Text = address;
+            cityRec.Text = city;
+            stateRec.Text = state;
+            zipRec.Text = zip;
+
+            //Define Prices for Output and Constrain to Two Decimal Places
+            preTax.Text = String.Format("{0:F2}", preTaxPrice);
+            taxRec.Text = String.Format("{0:F2}", taxDue);
+            netRec.Text = String.Format("{0:F2}", totalPrice);
+
+        }
+    }
+}
